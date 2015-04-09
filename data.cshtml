@@ -1,0 +1,56 @@
+@{
+    Page.Title = "Home";
+
+    var db = Database.Open("SQLAzureConnection");
+
+    var sqlDropProducts = "DROP TABLE [Products]";
+    
+    var sqlCreateProducts = "CREATE TABLE [Products] ( " + 
+                  "[Id] int IDENTITY (1,1) NOT NULL " +
+                ", [Name] nvarchar(50) NOT NULL " +
+                ", [Description] nvarchar(1000) NOT NULL " +
+                ", [Price] money NOT NULL " +
+                ", [ImageName] nvarchar(50) NULL " +
+                ") "; 
+
+    var sqlAlterProducts = "ALTER TABLE [Products] ADD CONSTRAINT [PK__Products__0000000000000018] PRIMARY KEY ([Id]) ";
+
+    var sqlInsertProducts = "SET IDENTITY_INSERT [Products] ON " +
+                       "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (1,N'Carrot Cake',N'A scrumptious mini-carrot cake encrusted with sliced almonds',8.99,N'carrot_cake.jpg') " +
+                        "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (2,N'Lemon Tart',N'A delicious lemon tart with fresh meringue cooked to perfection',9.99,N'lemon_tart.jpg') " +
+                        "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (3,N'Cupcakes',N'Delectable vanilla and chocolate cupcakes',5.99,N'cupcakes.jpg') " +
+                        "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (4,N'Bread',N'Fresh baked French-style bread',1.49,N'bread.jpg') " +
+                        "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (6,N'Pear Tart',N'A glazed pear tart topped with sliced almonds and a dash of cinnamon',5.99,N'pear_tart.jpg') " +
+                       "INSERT INTO [Products] ([Id],[Name],[Description],[Price],[ImageName]) VALUES (7,N'Chocolate Cake',N'Rich chocolate frosting cover this chocolate lover’s dream.    ',8.99,N'chocolate_cake.jpg') " +
+                       "SET IDENTITY_INSERT [Products] OFF ";
+         
+    var sqlDropOrders = "DROP TABLE [Orders]";
+    
+    var sqlCreateOrders = "CREATE TABLE [Orders] ( " + 
+                  "[Id] int IDENTITY (1,1) NOT NULL " +
+                ", [ProductId] int NOT NULL " +
+                ", [Email] nvarchar(1000) NOT NULL " +
+                ", [TwitterHandle] nvarchar(128) NOT NULL " +
+                ", [Date] datetime DEFAULT NULL " +
+                ", [Complete] int DEFAULT 0 " +
+                ") "; 
+
+   var sqlAlterOrders = "ALTER TABLE [Orders] ADD CONSTRAINT [PK__Orders__0000000000000018] PRIMARY KEY ([Id]) ";
+
+
+    //db.Execute(sqlDropProducts);
+    //db.Execute(sqlDropOrders);
+
+    db.Execute(sqlCreateProducts);
+    db.Execute(sqlAlterProducts);
+    db.Execute(sqlInsertProducts);
+    
+    db.Execute(sqlCreateOrders);
+    db.Execute(sqlAlterOrders);
+
+    
+
+
+
+   
+}
